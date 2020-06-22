@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>JavaScript 字符串</h2>
+
+        <p id="demo">Hello World!</p>
+
+        <button onclick="myFunction()">试一试</button>
+
+        <script>
+            var answer1 = "It's good to see you again!";
+            var answer2 = "He is called 'Bill'";
+
+            //document.getElementById('demo').innerHTML = answer1 + '<br>' + answer2;
+
+            var x = "中国是瓷器的故乡，因此china与\"china(中国)\"同名。";
+            //document.getElementById('demo').innerHTML = x;
+
+            var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            //document.getElementById('demo').innerHTML = txt.length;
+
+            //用反斜杠在文本字符串中进行换行,输出不换行。不能用反斜杠对代码行进行折行。
+            //document.getElementById('demo').innerHTML = 'Hello \
+            //js';
+
+            //indexOf() 方法返回指定文本首次出现的位置
+            var str = "The full name of China is the People's Republic of China.";
+            var pos = str.indexOf('name');
+            //document.getElementById('demo').innerHTML = pos;
+
+            //在字符串中搜索文本并在找到后返回这段文本 - match()
+            //单击按钮，在字符串化中执行对字母“ain”（/ain）的全局（/g）搜索，并显示匹配项。
+            // function myFunction() {
+            //     var str = "The rain in SPAIN stays mainly in the plain"; 
+            //     var res = str.match(/ain/g);
+            //     document.getElementById('demo').innerHTML = res;
+            // }
+
+            //替换字符串中的字符 - replace()
+            //请把下面的段落中的“Microsoft”替换为“W3School”
+            function myFunction() {
+                var str = document.getElementById('demo').innerHTML;
+                var txt = str.replace('Microsoft', 'W3School');
+                document.getElementById('demo').innerHTML = txt;
+            }
+
+            //把字符串转换为大写 - toUpperCase()
+            function myFunction() {
+                var text = document.getElementById('demo').innerHTML;
+                document.getElementById('demo').innerHTML = text.toUpperCase();
+            }
+
+            //把字符串转换为小写 - toLowerCase()
+            function myFunction() {
+                var text = document.getElementById('demo').innerHTML;
+                document.getElementById('demo').innerHTML = text.toLowerCase();
+            }
+
+            //把字符串拆分入数组 - split()
+            function myFunction() {
+                var str = "a,b,c,d,e,f";
+                var arr = str.split('');
+                document.getElementById('demo').innerHTML = arr[0];
+            }
+
+        </script>
+    </body>
+</html>

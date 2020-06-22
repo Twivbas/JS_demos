@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function myFunction(text) {
+                document.getElementById('demo').innerHTML = text;
+            }
+        </script>
+    </head>
+    <body>
+        <p>单击其中一个按钮时，将调用一个函数。该函数将显示传递给它的参数。</p>
+
+        <form>
+            <input type="button" onclick="myFunction('Good morning!')" value="In the morning">
+            <input type="button" onclick="myFunction('Good evening!')" value="In the evening">
+        </form>
+
+        <p id="demo"></p>
+    </body>
+</html>
