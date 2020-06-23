@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p></p>
+
+        <p id='demo'></p>
+
+        <script>
+            //valueOf() 把数字返回为数字：
+            var x = 123;
+            document.getElementById('demo').innerHTML = x.valueOf() + "<br>" + (123).valueOf() + "<br>" + 
+            (100 + 23).valueOf();
+
+            //toExponential() 方法返回一个字符串，包含进行舍入的数字并使用指数表示法。
+            var x = 9.656;
+            document.getElementById('demo').innerHTML = x.toExponential() + "<br>" + 
+            x.toExponential(2) + "<br>" + 
+            x.toExponential(4) + "<br>" +
+            x.toExponential(6);
+
+            //toFixed() 方法将数字四舍五入为给定的位数
+            document.getElementById('demo').innerHTML = x.toFixed() + "<br>" + 
+            x.toFixed(2) + "<br>" +
+            x.toFixed(4) + "<br>" +
+            x.toFixed(6);
+
+            //toPrecision() 方法返回一个字符串，其中包含一个用指定长度写的数字
+            document.getElementById('demo').innerHTML = 
+            x.toPrecision() + "<br>" +
+            x.toPrecision(2) + "<br>" +
+            x.toPrecision(4) + "<br>" +
+            x.toPrecision(6);
+
+            //Number() 方法把变量转换为数字
+            document.getElementById('demo').innerHTML = 
+            Number(true) + "<br>" + 
+            Number(' 10') + "<br>";
+
+            //全局 JavaScript 函数  parseInt() 把字符串转换为数字
+            document.getElementById('demo').innerHTML = 
+            parseInt("10") + "<br>" + 
+            parseInt("10.33") + "<br>" +
+            parseInt("10 year") + "<br>" + 
+            parseInt("year 10");
+
+            //parseFloat() 方法把字符串转换为数字
+            document.getElementById('demo').innerHTML = 
+            parseFloat("10") + "<br>" +
+            parseFloat("10.33") + "<br>" +
+            parseFloat("10 year") + "<br>" +
+            parseFloat("year 10");
+
+            //对变量、表达式或值使用数字属性，将返回 undefined
+            document.getElementById('demo').innerHTML = x.MAX_VALUE;
+        </script>
+    </body>
+</html>
