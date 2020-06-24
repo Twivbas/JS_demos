@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo"></p>
+
+        <script>
+            var d = new Date();
+            document.getElementById('demo').innerHTML = d;
+
+            //getFullYear() 方法返回日期的完整年
+            document.getElementById('demo').innerHTML = d.getFullYear();
+
+            //getTime() 函数返回从那时起的毫秒数
+            //JavaScript 中的内部时钟从 1970 年 1 月 1 日午夜开始计算
+            document.getElementById('demo').innerHTML = d.getTime();
+            document.getElementById('demo').innerHTML = Number(d);
+
+            //setFullYear() 方法设置日期对象的年份
+            d.setFullYear(1998);
+            document.getElementById('demo').innerHTML = d;
+
+            //toUTCString() 方法将日期转换为 UTC 字符串（日期显示标准）
+            document.getElementById('demo').innerHTML = d.toUTCString();
+
+            //getDay() 方法将周名作为数字返回
+            var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            document.getElementById('demo').innerHTML = days[d.getDay()];
+        </script>
+    </body>
+</html>

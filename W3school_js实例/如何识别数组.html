@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>当在数组上使用时，instanceof 运算符返回true</p>
+
+        <p>新的 ECMASCRIPT 5 方法 isArray 在数组上使用时返回 true</p>
+
+        <p id="demo"></p>
+
+        <script>
+            var fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+            //document.getElementById('demo').innerHTML = fruits instanceof Array;
+
+            document.getElementById('demo').innerHTML = Array.isArray(fruits);
+        </script>
+    </body>
+</html>
