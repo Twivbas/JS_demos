@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>数组迭代</p>
+
+        <p id="demo"></p>
+
+        <script>
+            //Array.forEach()为每个元素调用一次函数
+            var txt = "";
+            var numbers = [45, 4, 9, 16, 25];
+            numbers.forEach(myFunction);
+            document.getElementById('demo').innerHTML = txt;
+        
+            function myFunction(value, index, array) {
+                txt = txt + value + "<br>";
+            }
+
+            //Array.map()通过对每个数组元素执行函数来创建新数组
+            var numbers1 = [45, 4, 9, 16, 25];
+            var numbers2 = numbers1.map(myFunction);
+
+            document.getElementById("demo").innerHTML = numbers2;
+
+            function myFunction(value, index, array) {
+                return value * 2;
+            }
+
+            //Array.filter()使用通过测试的所有数组元素创建一个新数组
+            var over18 = numbers.filter(myFunction);
+            document.getElementById("demo").innerHTML = over18;
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            //使用Array.reduce()确定数组中所有数字的总和
+            var sum = numbers.reduce(myFunction);
+            document.getElementById("demo").innerHTML = sum;
+
+            function myFunction(total, value, index, array) {
+                return total + value;
+            }
+
+            //Array.every() 方法检查所有数组值是否通过测试
+            //有一个元素不满足就返回false
+            var allOver18 = numbers.every(myFunction);
+            document.getElementById("demo").innerHTML = allOver18;
+
+            function myFunction(value, index, array) {
+                return value > 4;
+            }
+
+            //Array.some() 方法检查某些数组值是否通过了测试
+            var someOver18 = numbers.some(myFunction);
+            document.getElementById("demo").innerHTML = someOver18;
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            //Array.indexOf()返回数组中某个指定的元素位置
+            var fruits = ["Apple", "Orange", "Apple", "Mango"];
+            var a = fruits.indexOf("Apple");
+            document.getElementById("demo").innerHTML = a;
+
+            //Array.lastIndexOf()从右开始查找元素
+            var a = fruits.lastIndexOf("Apple");
+            document.getElementById("demo").innerHTML = a;
+
+            //Array.find()返回通过测试（函数内判断）的数组的第一个元素的值
+            var first = numbers.find(myFunction);
+            document.getElementById("demo").innerHTML = first;
+
+            function myFunction(value, index, array) {
+                return value > 18;
+            }
+
+            //Array.findIndex()返回通过测试的第一个元素的位置
+        </script>
+    </body>
+</html>

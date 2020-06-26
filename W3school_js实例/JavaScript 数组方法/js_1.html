@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>push() 方法将新元素追加到数组中。</p>
+
+        <button onclick="myFuction()">click</button>
+
+        <p id="demo"></p>
+
+        <p id="demo1"></p>
+        <p id="demo2"></p>
+
+        <script>
+            var fruits = ["Banana", "Orange", "Apple", "Mango"];
+            document.getElementById('demo').innerHTML = fruits;
+
+            //pop() 方法从数组中删除最后一个元素
+            //fruits.pop();
+            document.getElementById('demo').innerHTML = fruits;
+
+            //join() 方法将数组元素连接成一个字符串
+            document.getElementById('demo').innerHTML = fruits.join('-');
+            
+            //concat() 方法用于合并（连接）数组
+            var myGirls = ["Emma", "Isabella"];
+            document.getElementById('demo').innerHTML = fruits.concat(myGirls);
+
+            var arr1 = ["Emma", "Isabella"];
+            var arr = arr1.concat(myGirls, fruits);
+            document.getElementById('demo').innerHTML = arr;
+
+            //splice() 方法将新元素添加到数组中
+
+            function myFuction() {
+                //fruits.push('Ming');
+                fruits.splice(2, 0, "Lemon", "Kiwi"); 
+                document.getElementById('demo').innerHTML = fruits;
+            }
+
+            //toString() 方法以逗号分隔的字符串返回数组
+            document.getElementById('demo').innerHTML = fruits.toString();
+
+            //unshift() 方法将新元素添加到数组的开头
+            function myFuction() {
+                fruits.unshift("Lemon");
+                document.getElementById('demo').innerHTML = fruits;
+            }
+
+            //shift() 方法删除数组的第一个元素（并将所有其他元素“移位”到左侧）
+            document.getElementById("demo1").innerHTML = fruits;
+            //fruits.shift();
+            //document.getElementById("demo2").innerHTML = fruits;
+
+            //选取数组中的元素 - slice()
+            document.getElementById('demo1').innerHTML = fruits.slice(1);
+
+        </script>
+    </body>
+</html>
