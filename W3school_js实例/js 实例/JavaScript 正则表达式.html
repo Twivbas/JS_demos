@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button onclick="myFunction()">click</button>
+
+        <p id="demo">Please visit Microsoft and Microsoft!</p>
+
+        <script>
+            //在字符串中搜索“w3School”，并显示匹配的位置
+            var str = "Visit W3school!"; 
+            var n = str.search(/W3School/i);
+            //document.getElementById('demo').innerHTML = n;
+
+            //将“microsoft”替换为以下段落中的“W3School”
+            function myFunction() {
+                var str = document.getElementById('demo').innerHTML;
+                var n = str.replace(/microsoft/ig, 'W3School');
+                document.getElementById('demo').innerHTML = n;
+            }
+
+        </script>
+    </body>
+</html>

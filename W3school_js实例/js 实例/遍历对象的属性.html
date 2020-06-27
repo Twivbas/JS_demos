@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>for...in 语句循环遍历对象的属性。</p>
+
+        <p id="demo"></p>
+
+        <script>
+            var txt = "";
+            var person = {fname:"Bill", lname:"Gates", age:62}; 
+            var x;
+            for (x in person) {
+                //txt += person[x] + " ";
+                txt += x + " ";
+            }
+            document.getElementById("demo").innerHTML = txt;
+        </script>
+    </body>
+</html>
