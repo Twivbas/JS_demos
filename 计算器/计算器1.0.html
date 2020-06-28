@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <!--
+            一个简单的计算器。
+            功能：
+            1.可以输入数字
+            2.选择加减乘除运算符
+            3.输出结果
+            4.显示，数字和运算
+
+            先实现一个简单的加法。How?
+            points:
+            获取输入的数字。
+
+            下一步改进？
+            1.改进小数的运算。
+            2.增加CE（输入数值出错时，将当前数归0）、C(重置)
+            3.改进结果的显示方式或位置
+            4.增加已输入数字和运算符的显示
+            5.外观优化
+
+        -->
+        <h3>计算器1.0</h3>
+
+        <p><input type="text" id="input" ></p>
+
+        <button onclick="plus()">+</button>
+        <button onclick="minus()">-</button>
+        <button onclick="mult()">*</button>
+        <button onclick="division()">/</button>
+        <button onclick="remainder()">%</button>
+
+        <button onclick="equal()">=</button>
+
+        <p id="ina">a</p>
+        <p id="inb">b</p>
+        <p id="output"></p>
+        
+        <script>
+            var a = '', b, operator, result;
+            function getNum() {
+                if (a === '') {
+                    a = +document.getElementById('input').value;
+                    document.getElementById('ina').innerHTML = a;
+                } else {
+                    b = +document.getElementById('input').value;
+                    document.getElementById('inb').innerHTML = b;
+                }
+                document.getElementById('input').value = '';
+            }
+
+            function plus() {
+                getNum();
+                operator = 'plus'; 
+            }
+
+            //减法
+            function minus() {
+                getNum();
+                operator = 'minus';
+            }
+
+            function mult() {
+                getNum();
+                operator = 'mult';
+            }
+
+            function division() {
+                getNum();
+                operator = 'division';
+            }
+
+            function remainder() {
+                getNum();
+                operator = 'remainder';
+            }
+
+            function equal() {
+                getNum();
+                if (operator === 'plus') {
+                    result = a + b;
+                } else if (operator === 'minus') {
+                    result = a - b;
+                } else if (operator === 'mult') {
+                    result = a * b;
+                } else if (operator === 'division') {
+                    result = a / b;
+                } else if (operator === 'remainder') {
+                    result = a % b;
+                }
+                document.getElementById('output').innerHTML = 'result:  ' + result;
+                operator = '';
+                a = '';
+                b = '';
+            }
+            
+
+        </script>
+    </body>
+</html>
