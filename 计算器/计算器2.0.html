@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <!--
+            一个简单的计算器。
+            功能：
+            1.可以输入数字
+            2.选择加减乘除运算符
+            3.输出结果
+            4.显示，数字和运算
+
+            先实现一个简单的加法。How?
+            points:
+            获取输入的数字。
+
+            下一步改进？
+            1.改进小数的运算。
+            2.增加CE（输入数值出错时，将当前数归0）、C(重置)
+            add: 增加数字按键。
+
+            未完成的：
+            3.改进结果的显示方式或位置
+            4.增加已输入数字和运算符的显示
+            5.外观优化
+
+        -->
+        <h3>计算器2.0</h3>
+
+        <p><input type="text" id="onwork"></p>
+        <p><input type="text" id="input" ></p>
+
+        <button onclick="plus()">+</button>
+        <button onclick="minus()">-</button>
+        <button onclick="mult()">*</button>
+        <button onclick="division()">/</button><br>
+
+        <button onclick="percent()">%</button>
+        <button onclick="cle()">CE</button>
+        <button onclick="cancle()">C</button><br>
+
+        <button onclick="equal()">=</button><br>
+
+        <button onclick="document.getElementById('input').value += 1" >1</button>
+        <button onclick="document.getElementById('input').value += 2">2</button>
+        <button onclick="document.getElementById('input').value += 3">3</button><br>
+        <button onclick="document.getElementById('input').value += 4">4</button>
+        <button onclick="document.getElementById('input').value += 5">5</button>
+        <button onclick="document.getElementById('input').value += 6">6</button><br>
+        <button onclick="document.getElementById('input').value += 7">7</button>
+        <button onclick="document.getElementById('input').value += 8">8</button>
+        <button onclick="document.getElementById('input').value += 9">9</button>
+        <button onclick="document.getElementById('input').value += '.'">.</button>
+
+
+        <p id="ina">a</p>
+        <p id="inb">b</p>
+        <p id="output"></p>
+        
+        <script>
+            var a = '', b, operator, result, x;
+
+            //获取输入的数字
+            function getNum() {
+                if (a === '') {
+                    a = +document.getElementById('input').value;
+                    document.getElementById('ina').innerHTML = a;
+                } else {
+                    b = +document.getElementById('input').value;
+                    document.getElementById('inb').innerHTML = b;
+                }
+                document.getElementById('input').value = '';
+            }
+
+            //获得输入数字的最大小数位数x
+            function getx(a, b) {
+                let x1 = 0, x2 = 0;
+                if (Math.round(a) !== a) {
+                    x1 = a.toString().split(".")[1].length;
+                }
+                if (Math.round(b) !== b) {
+                    x2 = b.toString().split(".")[1].length;
+                }
+                return x1 >= x2 ? x1: x2;
+            }
+
+            function plus() {
+                getNum();
+                operator = 'plus'; 
+            }
+
+            //减法
+            function minus() {
+                getNum();
+                operator = 'minus';
+            }
+
+            function mult() {
+                getNum();
+                operator = 'mult';
+            }
+
+            function division() {
+                getNum();
+                operator = 'division';
+            }
+
+            //在数字后面加%号，不是求余
+            function percent() {
+                document.getElementById('input').value /= 100; 
+            }
+
+            //把当前输入的数归0
+            function cle() {
+                document.getElementById('input').value = 0;
+            }
+
+            function cancle() {
+                document.getElementById('input').value = 0;
+                operator = '';
+                a = '';
+                b = '';
+            }
+
+            function equal() {
+                getNum();
+                x = getx(a, b);
+                if (operator === 'plus') {
+                    result = (a + b).toFixed(x);
+                } else if (operator === 'minus') {
+                    result = (a - b).toFixed(x);
+                } else if (operator === 'mult') {
+                    result = (a * b).toFixed(x);
+                } else if (operator === 'division') {
+                    result = a / b;
+                } 
+                document.getElementById('output').innerHTML = 'result:  ' + result;
+                operator = '';
+                a = '';
+                b = '';
+            }
+            
+
+        </script>
+    </body>
+</html>
