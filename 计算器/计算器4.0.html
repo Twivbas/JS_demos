@@ -7,31 +7,32 @@
             }
 
             #calculator {
-                height: 55vh;
-                width: 250px;
+                height: 220px;
+                width: 110px;
                 background-color: rgb(135, 172, 172);
-                padding: 10px 20px;
+                padding: 10px 8px;
                 margin: 30px auto;
                 
             }
 
             #onwork {
-                width: 240px;
+                width: 105px;
                 margin-bottom: 0;
                 text-align: right;
                 font-size: 10px;
             }
 
             #input {
-                width: 240px;
+                width: 105px;
                 height: 25px;
                 margin-top: 0;
                 text-align: right;
-                font-size: 18px;
+                font-size: 15px;
             }
 
             #buttons {
                 margin: 10px auto;
+                
             }
 
             button {
@@ -60,12 +61,11 @@
             3.改进结果的显示方式或位置
             4.增加已输入数字和运算符的显示
             改进了数字按键的函数
-
-            未完成的：
-
             5.外观优化
             6.一些Bug
-            7.测试，改进优化
+
+            css再改进
+            优化什么？
 
         -->
         <h3>计算器4.0</h3>
@@ -74,42 +74,50 @@
             <input type="text" id="input" >
 
             <div id="buttons">
-                <button onclick="plus()">+</button>
-                <button onclick="minus()">-</button>
-                <button onclick="mult()">*</button>
-                <button onclick="division()">/</button><br>
-
-                <button onclick="percent()">%</button>
                 <button onclick="cle()">CE</button>
-                <button onclick="cancle()">C</button><br>
+                <button onclick="cancle()">C</button>
+                <button onclick="percent()" style="width: 35px;">%</button><br>
 
-                <button onclick="equal()">=</button><br>
-
-                <button onclick="addNum(value)" value="1" >1</button>
-                <button onclick="addNum(value)" value="2" >2</button>
-                <button onclick="addNum(value)" value="3" >3</button><br>
-                <button onclick="addNum(value)" value="4" >4</button>
-                <button onclick="addNum(value)" value="5" >5</button>
-                <button onclick="addNum(value)" value="6" >6</button><br>
                 <button onclick="addNum(value)" value="7" >7</button>
                 <button onclick="addNum(value)" value="8" >8</button>
                 <button onclick="addNum(value)" value="9" >9</button>
+                <button onclick="division()">/</button><br>
+
+                <button onclick="addNum(value)" value="4" >4</button>
+                <button onclick="addNum(value)" value="5" >5</button>
+                <button onclick="addNum(value)" value="6" >6</button>
+                <button onclick="mult()">*</button><br>
+
+                <button onclick="addNum(value)" value="1" >1</button>
+                <button onclick="addNum(value)" value="2" >2</button>
+                <button onclick="addNum(value)" value="3" >3</button>
+                <button onclick="minus()">-</button><br>
+                
                 <button onclick="addNum(value)" value="0" >0</button>
-                <button onclick="document.getElementById('input').value += '.'">.</button>
+                <button onclick="document.getElementById('input').value += '.'" style="width: 23.38px;">.</button>
+                <button onclick="equal()">=</button>
+                <button onclick="plus()" style="width: 21px;">+</button>
             </div>
             
         </div>
         
-
+        <!--
         <p id="ina">a</p>
         <p id="inb">b</p>
         <p id="output"></p>
+        -->
         
         <script>
-            let a = '', b, operator, result, x;
+            let a = '', b, operator ='', result, x;
+
             let count = 0;  //运算结束时为1
+            let cleCount = 0;   //cle标志
 
             function addNum(value) {
+                if (cleCount === 1) {
+                    document.getElementById('input').value = '';
+                    cleCount = 0;
+                }
                 if(count) {
                     document.getElementById('input').value = '';
                     count = 0;
@@ -120,11 +128,11 @@
             //获取输入的数字
             function getNum() {
                 if (a === '') {
-                    a = +document.getElementById('input').value;
-                    document.getElementById('ina').innerHTML = a;
+                    a = +(document.getElementById('input').value);
+                    //document.getElementById('ina').innerHTML = a;
                 } else {
-                    b = +document.getElementById('input').value;
-                    document.getElementById('inb').innerHTML = b;
+                    b = +(document.getElementById('input').value);
+                    //document.getElementById('inb').innerHTML = b;
                 }
                 document.getElementById('input').value = '';
             }
@@ -132,10 +140,10 @@
             //获得输入数字的最大小数位数x
             function getx(a, b) {
                 let x1 = 0, x2 = 0;
-                if (Math.round(a) !== a) {
+                if (Math.round(a) !== a ) {
                     x1 = a.toString().split(".")[1].length;
                 }
-                if (Math.round(b) !== b) {
+                if (Math.round(b) !== b ) {
                     x2 = b.toString().split(".")[1].length;
                 }
                 return x1 >= x2 ? x1: x2;
@@ -174,16 +182,21 @@
             //把当前输入的数归0
             function cle() {
                 document.getElementById('input').value = 0;
+                cleCount = 1;
             }
 
             function cancle() {
                 document.getElementById('input').value = 0;
+                cleCount = 1;
                 operator = '';
                 a = '';
                 b = '';
             }
 
             function equal() {
+                if (operator === '') {
+                    return 0;
+                }
                 getNum();
                 x = getx(a, b);
                 if (operator === 'plus') {
