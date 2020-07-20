@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
 
 * {
@@ -39,9 +40,9 @@ h1 {
 }
 
 .controls .btn {
-    cursor: pointer;
-    background: transparent;
     border: 0;
+    background: transparent;
+    cursor: pointer;
 }
 
 .controls .fa-play {
