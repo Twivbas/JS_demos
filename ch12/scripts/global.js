@@ -284,6 +284,87 @@ function displayAbbreviations() {
   container.appendChild(dlist);
 }
 
+function focusLabels() {
+  if (!document.getElementsByTagName) return false;
+  let labels = document.getElementsByTagName('label');
+  for (let i=0; i<labels.length; i++) {
+    if (!labels[i].getAttribute('for')) continue;
+    labels[i].onclick = function() {
+      let id = this.getAttribute('for');
+      if (!document.getElementById(id)) return false;
+      let element = document.getElementById(id);
+      element.focus();
+    }
+  }
+}
+
+function resetFields(whichform) {
+  if (Modernizr.input.placeholder) return;
+  for (let i=0; i<whichform.elements.length; i++) {
+    let element = whichform.elements[i];
+    if (element.type == "submit") continue;
+    let check = element.placeholder || element.getAttribute('placeholder');
+    if (!check) continue;
+    element.onfocus = function() {
+      let text = this.placeholder || this.getAttribute('placeholder');
+      if (this.value == text) {
+        this.className = '';
+        this.value = '';
+      }
+    }
+    element.onblur = function() {
+      if (this.value == '') {
+        this.className = 'placeholder';
+        this.value = this.placeholder || this.getAttribute('placeholder');
+      }
+    }
+    element.onblur();
+  }
+}
+
+function prepareForms() {
+  for (let i=0; i<document.forms.length; i++) {
+    let thisform = document.forms[i];
+    resetFields(thisform);
+    thisform.onsubmit = function() {
+      alert(2);
+      return validateForm(this);
+    }
+  }
+}
+
+function isFilled(field) {
+  if (field.value.replace(' ','').length == 0) return false;
+  let placeholder = field.placeholder || field.getAttribute('placeholder');
+  return (field.value != placeholder);
+}
+
+function isEmail(field) {
+  return (field.value.indexOf('@') != -1 && field.value.indexOf('.') != -1);
+}
+
+function validateForm(whichform) {
+  alert(1);
+  for (let i=0; i<whichform.elements.length; i++) {
+    let element = whichform.elements[i];
+    alert(3);
+    if (element.required == 'required') {
+      alert(4);
+      if (!isFilled(element)) {
+        alert('Please fill in the ' + element.name + ' field.');
+        return false;
+      }
+    }
+    if (element.type == 'email') {
+      if (!isEmail(element)) {
+        alert('The ' + element.name + ' field must be a valid email address.');
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 addLoadEvent(highlightPage);
 addLoadEvent(prepareSlideshow);
 addLoadEvent(prepareInternalnav);
@@ -292,3 +373,5 @@ addLoadEvent(prepareGallery);
 addLoadEvent(stripeTables);
 addLoadEvent(highlightRows);
 addLoadEvent(displayAbbreviations);
+addLoadEvent(focusLabels);
+addLoadEvent(prepareForms);
