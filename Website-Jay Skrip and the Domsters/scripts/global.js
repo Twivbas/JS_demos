@@ -327,8 +327,11 @@ function prepareForms() {
     let thisform = document.forms[i];
     resetFields(thisform);
     thisform.onsubmit = function() {
-      alert(2);
-      return validateForm(this);
+      //return validateForm(this);
+      if (!validateForm(this)) return false;
+      let article = document.getElementsByTagName('article')[0];
+      if (submitFormWithAjax(this, article)) return false;
+      return true;
     }
   }
 }
@@ -344,12 +347,9 @@ function isEmail(field) {
 }
 
 function validateForm(whichform) {
-  alert(1);
   for (let i=0; i<whichform.elements.length; i++) {
     let element = whichform.elements[i];
-    alert(3);
     if (element.required == 'required') {
-      alert(4);
       if (!isFilled(element)) {
         alert('Please fill in the ' + element.name + ' field.');
         return false;
@@ -362,6 +362,62 @@ function validateForm(whichform) {
       }
     }
   }
+  return true;
+}
+
+function getHTTPObject() {
+  if (typeof XMLHttpRequest == 'undefined') {
+    XMLHttpRequest = function() {
+      try { return new ActiveXObject('Msxml2.XMLHTTP.6.0'); }
+        catch (e) {}
+      try { return new ActiveXObject('Msxml2.XMLHTTP.3.0'); }
+        catch (e) {}
+      try { return new ActiveXObject('Msxml2.XMLHTTP'); }
+        catch (e) {}
+      return false;
+    } 
+  }
+  return new XMLHttpRequest();
+}
+
+function displayAjaxLoading(element) {
+  while (element.hasChildNodes()) {
+    element.removeChild(element.lastChild);
+  }
+  let content = document.createElement('img');
+  content.setAttribute('src', 'images/logo.gif'); //load.gif
+  content.setAttribute('alt', 'Loading...');
+  element.appendChild(content);
+}
+
+function submitFormWithAjax(whichform, thetarget) {
+  let request = getHTTPObject();
+  if (!request) { return false; }
+  displayAjaxLoading(thetarget);
+  let dataParts = [];
+  let element;
+  for (let i=0; i<whichform.elements.length; i++) {
+    element = whichform.elements[i];
+    dataParts[i] = element.name + '=' + encodeURIComponent(element.value);
+  }
+  let data = dataParts.join('&');
+  request.open('GET', whichform.getAttribute('action'), true);
+  request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  request.onreadystatechange = function() {
+    if (request.readyState == 4) {
+      if (request.status == 200 || request.status == 0) {
+        let matches = request.responseText.match(/<article>([\s\S]+)<\/article>/);
+        if (matches.length > 0) {
+          thetarget.innerHTML = matches[1];
+        } else {
+          thetarget.innerHTML = '<p>Oops, there was an error. Sorry.</p>';
+        }
+      } else {
+        thetarget.innerHTML = '<p>' + request.statusText + '</p>';
+      }
+    }
+  };
+  request.send(data);
   return true;
 }
 
